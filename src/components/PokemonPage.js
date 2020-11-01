@@ -12,9 +12,13 @@ class PokemonPage extends React.Component {
   }
 
   componentDidMount() {
+    this.fetchPokes()
+  }
+
+  fetchPokes = () => {
     fetch('http://localhost:3000/pokemon')
-      .then(resp => resp.json())
-      .then(pokemon => this.setState({pokemon}))
+    .then(resp => resp.json())
+    .then(pokemon => this.setState({pokemon}))
   }
 
   searchHandler = e => {
@@ -26,7 +30,7 @@ class PokemonPage extends React.Component {
   }
 
   filteredPokemon = () => {
-    return this.state.pokemon.filter(poke => poke.name.includes(this.state.searchTerm.toLowerCase()))
+    return this.state.pokemon.filter(poke => poke.name.includes(this.state.searchTerm.toLowerCase())).sort((a, b) => a.id - b.id)
   }
 
   submitHandler = newPoke => {
@@ -51,10 +55,35 @@ class PokemonPage extends React.Component {
       body: JSON.stringify(pokeObj)
     })
     .then(resp => resp.json())
-    .then(newPoke => {
-      let updatedPoke = [newPoke, ...this.state.pokemon]
+    .then(poke => {
+      let updatedPoke = [poke, ...this.state.pokemon]
       this.setState(() => ({pokemon: updatedPoke}))
     })
+  }
+
+  deleteHandler = delPoke => {
+    let updatedPokes = this.state.pokemon.filter(poke => poke !== delPoke)
+    console.log(updatedPokes)
+    fetch(`http://localhost:3000/pokemon/${delPoke.id}`, {method: "DELETE"})
+      .then(resp => resp.json())
+      .then(this.setState({pokemon: updatedPokes}))
+  }
+
+  editName = updatedPoke => {
+    fetch(`http://localhost:3000/pokemon/${updatedPoke.id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json"
+      },
+      body: JSON.stringify(updatedPoke)
+    })
+      .then(resp => resp.json())
+      .then(updated => {
+        let minusUpdated = this.state.pokemon.filter(poke => poke.id !== updated.id)
+        let updatedPokes = [updated, ...minusUpdated]
+        this.setState(() => ({pokemon: updatedPokes}))
+      })
   }
 
   render() {
@@ -66,7 +95,7 @@ class PokemonPage extends React.Component {
         <br />
         <Search searchHandler={this.searchHandler} searchTerm={this.state.searchTerm}/>
         <br />
-        <PokemonCollection pokemon={this.filteredPokemon()}/>
+        <PokemonCollection pokemon={this.filteredPokemon()} deleteHandler={this.deleteHandler} updateHandler={this.editName}/>
       </Container>
     )
   }
