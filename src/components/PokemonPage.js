@@ -8,7 +8,8 @@ class PokemonPage extends React.Component {
 
   state={
     pokemon: [],
-    searchPokemon: []
+    searchPokemon: [],
+    searchValue: ""
   }
 
   componentDidMount(){
@@ -19,10 +20,13 @@ class PokemonPage extends React.Component {
         }))
   }
 
+  searchHandler = (e) => {
+    this.setState({searchValue: e.target.value})
+  }
 
-  // searchHandler = (e) => {
-
-  // }
+  filteredPokemon = () => {
+    return this.state.pokemon.filter(pokemon => pokemon.name.toUpperCase().includes(this.state.searchValue.toUpperCase()))
+  }
 
   render() {
     return (
@@ -31,9 +35,9 @@ class PokemonPage extends React.Component {
         <br />
         <PokemonForm />
         <br />
-        <Search />
+        <Search searchValue={this.state.searchValue} searchHandler={this.searchHandler} filter={this.filteredPokemon}/>
         <br />
-        <PokemonCollection pokemons={this.state.pokemon}/>
+        <PokemonCollection pokemons={this.filteredPokemon()}/>
       </Container>
     )
   }
