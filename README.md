@@ -8,7 +8,7 @@
 
 ## Project Goals
 
-- Create an index displaying pokemon 'cards'
+✅ - Create an index displaying pokemon 'cards'
   ✅ - Render each pokemon name, picture, and hp in a card
   ✅- **When clicked, the card should toggle between displaying the front and back pictures**
 - Allow users to search a pokemon by its name in order to narrow down the cards shown on the page

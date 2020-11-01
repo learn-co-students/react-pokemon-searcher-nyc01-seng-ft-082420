@@ -7,7 +7,8 @@ import { Container } from 'semantic-ui-react'
 class PokemonPage extends React.Component {
 
   state={
-    pokemon: []
+    pokemon: [],
+    searchPokemon: []
   }
 
   componentDidMount(){
@@ -17,6 +18,11 @@ class PokemonPage extends React.Component {
           pokemon: pokemon
         }))
   }
+
+
+  // searchHandler = (e) => {
+
+  // }
 
   render() {
     return (

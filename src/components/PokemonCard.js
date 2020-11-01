@@ -13,7 +13,6 @@ class PokemonCard extends React.Component {
     }))
   }
 
-
   render() {
     return (
       <Card>
