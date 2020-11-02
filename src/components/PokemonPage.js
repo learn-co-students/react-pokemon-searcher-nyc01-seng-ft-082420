@@ -33,6 +33,10 @@ class PokemonPage extends React.Component {
     .catch(console.log)
   }
 
+  addFilter = (search) => {
+    this.setState({filter: search})
+  }
+
   render() {
 
     return (
@@ -42,9 +46,9 @@ class PokemonPage extends React.Component {
         <br />
         <PokemonForm createPokemon={this.createPokemon} />
         <br />
-        <Search />
+        <Search filter={this.addFilter}/>
         <br />
-        <PokemonCollection pokemon={this.state.pokemon}/>
+        <PokemonCollection pokemon={this.state.filter ? this.state.pokemon.filter( poke => poke.name.toLowerCase().includes(this.state.filter.toLowerCase())) : this.state.pokemon}/>
       </Container>
     )
   }
