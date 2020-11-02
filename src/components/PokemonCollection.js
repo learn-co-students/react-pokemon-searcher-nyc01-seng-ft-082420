@@ -6,7 +6,7 @@ class PokemonCollection extends React.Component {
 
 
   renderPokemon = () => {
-    return this.props.pokemon.map( poke => <PokemonCard poke={poke}/>)
+    return this.props.pokemon.map( poke => <PokemonCard key={poke.id} poke={poke}/>)
   }
 
   render() {

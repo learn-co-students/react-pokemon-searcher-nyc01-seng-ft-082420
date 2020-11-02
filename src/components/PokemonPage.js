@@ -29,7 +29,7 @@ class PokemonPage extends React.Component {
     }
     fetch('http://localhost:3000/pokemon', configObj)
     .then(res=>res.json())
-    .then(console.log)
+    .then(res => this.setState( (prev) => ({pokemon: [...prev.pokemon, res]})))
     .catch(console.log)
   }
 
