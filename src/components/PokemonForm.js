@@ -2,6 +2,22 @@ import React from 'react'
 import { Form } from 'semantic-ui-react'
 
 class PokemonForm extends React.Component {
+
+  state = {
+    name: "",
+    hp: "",
+    frontUrl : "",
+    backUrl: "" 
+  }
+
+  formEdit = () => {
+    
+  }
+
+  localCreatePokemon = () => {
+    this.props.createPokemon()
+  }
+
   render() {
     return (
       <div>
