@@ -2,13 +2,14 @@ import React from 'react'
 
 const Search = props => {
 
-  function filterByName(e){
+  const handleSearch = (e) => {
     props.searchHandler(e)
   }
+
   return (
     <div className="ui search">
       <div className="ui icon input">
-        <input className="prompt" value={props.searchValue} onChange={filterByName}/>
+        <input value={props.searchValue} onChange={handleSearch}className="prompt"/>
         <i className="search icon" />
       </div>
     </div>
@@ -16,5 +17,3 @@ const Search = props => {
 }
 
 export default Search
-
-
