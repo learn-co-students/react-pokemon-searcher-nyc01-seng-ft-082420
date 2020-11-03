@@ -38,3 +38,13 @@ Be sure to use good programming practices, such as clear variable names and
 single responsibility functions. We want our react app to be clean, easy to
 read and understand, and of course, easy to to debug, or even add more
 features to later.
+
+
+#######
+  1.√ Creat an index display for pokemon cards
+    2.√ render each pokemon name, picture and hp in their cards
+    3.√ when the card is clicked toggle between fron and back of the card
+
+  4.√ Allow users to search a pokemon by name (it should narrow down the cards shown in the page)
+  5.Add a new pokemon without having the page refresh
+
